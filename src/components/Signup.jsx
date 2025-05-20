@@ -91,7 +91,7 @@ const Signup = () => {
       setUser(user);
       navigate("/verify");
     } catch (err) {
-      setError(err.response?.data?.message || "Signup failed. Please try again.");
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -103,7 +103,7 @@ const Signup = () => {
         className="bg-white p-[30px] rounded-md shadow-md w-full max-w-sm"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl mb-4 text-center">Sign Up</h2>
+        <h2 className="text-2xl mb-4 text-center">New Registration</h2>
 
         {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
 
@@ -208,7 +208,7 @@ const Signup = () => {
           className="w-full bg-green-500 text-white py-2 rounded disabled:opacity-50"
           disabled={loading || !isVerified}
         >
-          {loading ? "Signing up..." : "Sign Up"}
+          {loading ? "Registring..." : "Registration"}
         </button>
       </form>
     </div>

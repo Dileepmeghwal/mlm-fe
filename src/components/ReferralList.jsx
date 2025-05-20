@@ -82,7 +82,7 @@ const ReferredUserList = () => {
                       User Name
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Email
+                      Phone No.
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Joined Date
@@ -100,7 +100,7 @@ const ReferredUserList = () => {
                         {referral.referredUser.last_name}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {referral.referredUser.email}
+                        {referral?.referredUser?.phone}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {moment(referral.createdAt).format(

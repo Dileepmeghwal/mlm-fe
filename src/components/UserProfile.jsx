@@ -209,7 +209,7 @@ const UserProfile = () => {
               />
               <ProfileDetailItem
                 icon={<FaUniversity className="text-gray-500" />}
-                label="Bank Account "
+                label="Bank Account No "
                 value={
                   userDetails.bankAC ? ` ${userDetails.bankAC}` : "Not provided"
                 }

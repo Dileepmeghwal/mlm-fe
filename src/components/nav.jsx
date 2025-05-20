@@ -95,7 +95,7 @@ export default function Nav() {
                   // )
                 }
               </li>
-              {(!user || !authToken) && <NavItem to="/signup" label="Signup" />}
+              {(!user || !authToken) && <NavItem to="/signup" label="New Registration" />}
             </ul>
           </div>
 
