@@ -19,6 +19,7 @@ export default function Nav() {
   };
 
   const handleLogout = () => {
+    alert('Are you sure want to logout ?')
     setAuthToken(null);
     localStorage.removeItem("authToken");
     setIsMenuOpen(false); // Close menu on logout
@@ -78,12 +79,7 @@ export default function Nav() {
               <li>
                 {
                   user && authToken && (
-                    <button
-                      onClick={handleLogout}
-                      className="text-sm lg:text-base font-medium hover:text-indigo-700 transition-all duration-500 text-gray-500"
-                    >
-                      Logout
-                    </button>
+                   <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
                   )
                   // : (
                   //   <Link
@@ -157,12 +153,7 @@ export default function Nav() {
               )}
               <li>
                 {user && authToken ? (
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left text-sm font-medium hover:text-indigo-700 transition-all duration-500 text-gray-500 py-2"
-                  >
-                    Logout
-                  </button>
+                 <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
                 ) : (
                   <Link
                     to="/login"
@@ -181,3 +172,57 @@ export default function Nav() {
     </nav>
   );
 }
+
+
+const LogoutConfirmation = ({ setAuthToken, setIsMenuOpen }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = () => {
+    setAuthToken(null);
+    localStorage.removeItem("authToken");
+    setIsMenuOpen(false);
+    setIsOpen(false);
+  };
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
+  return (
+    <>
+      <button
+        onClick={openModal}
+        className="text-sm lg:text-base font-medium hover:text-indigo-700 transition-all duration-500 mb-2 lg:mb-0 lg:mr-6 text-gray-500  "
+      >
+        Logout
+      </button>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+              Confirm Logout
+            </h2>
+            <p className="mb-6 text-gray-600">
+              Are you sure you want to log out?
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+              >
+                Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+

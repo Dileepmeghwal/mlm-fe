@@ -154,7 +154,9 @@ const PlanPinManagement = () => {
                         {pin.plan.name}
                       </td>
                       <td className="py-3 px-4 border-b text-center">
-                        <div className="flex items-center justify-center gap-2 relative">
+                        <div
+                          className={`flex items-center justify-center gap-2 relative `}
+                        >
                           {/* Display pin or masked version */}
                           {showPinId === pin._id ? pin.pin : "••••••"}
 
@@ -280,7 +282,6 @@ const PlanPinManagement = () => {
 };
 
 export default PlanPinManagement;
-
 
 function CopyButton({ pin }) {
   const [copied, setCopied] = useState(false);

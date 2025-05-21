@@ -3,6 +3,7 @@ import axios from "axios";
 import { postRequest } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Signup = () => {
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
+  const [showPass, setShowPass] = useState(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -91,12 +93,16 @@ const Signup = () => {
       setUser(user);
       navigate("/verify");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed. Please try again.");
+      setError(
+        err.response?.data?.message || "Registration failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPass(!showPass);
+  };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
@@ -158,10 +164,16 @@ const Signup = () => {
               }
               className="bg-blue-500 text-white px-3 py-2 rounded disabled:opacity-50"
             >
-              {isSendingOtp ? "Sending..." : isOtpSent ? "Resend OTP" : "Send OTP"}
+              {isSendingOtp
+                ? "Sending..."
+                : isOtpSent
+                ? "Resend OTP"
+                : "Send OTP"}
             </button>
             {isOtpSent && !isVerified && resendCountdown > 0 && (
-              <span className="text-gray-500 self-center">in {resendCountdown}s</span>
+              <span className="text-gray-500 self-center">
+                in {resendCountdown}s
+              </span>
             )}
           </div>
         </div>
@@ -176,7 +188,9 @@ const Signup = () => {
                 pattern="\d{6}"
                 className="flex-1 border px-3 py-2 rounded"
                 value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                onChange={(e) =>
+                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                }
                 placeholder="6-digit OTP"
               />
               <button
@@ -191,7 +205,7 @@ const Signup = () => {
           </div>
         )}
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-1">Password</label>
           <input
             type="password"
@@ -201,6 +215,33 @@ const Signup = () => {
             required
             placeholder="Your password"
           />
+        </div> */}
+        <div className="mb-4 relative">
+          <label className="block mb-1">Password</label>
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              className="w-full border px-3 py-2 rounded pr-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Your password"
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+            >
+              {showPass ? (
+                <FiEyeOff className="h-5 w-5" />
+              ) : (
+                <FiEye className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+          <span className="text-xs text-red-800 italic">
+            Please note down your password!
+          </span>
         </div>
 
         <button

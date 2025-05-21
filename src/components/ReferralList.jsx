@@ -47,7 +47,7 @@ const ReferredUserList = () => {
           {/* Header with Level Name */}
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-800">
-              {levelName || "Referral"} Users
+              {levelName || "Referral"} Referral Users
             </h1>
             <p className="text-gray-600 mt-2">
               List of users referred under this level
@@ -96,11 +96,11 @@ const ReferredUserList = () => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {referral.referredUser.first_name}{" "}
-                        {referral.referredUser.last_name}
+                        {referral.referredUser.first_name || "-"}{" "}
+                        {referral.referredUser.last_name || '-'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {referral?.referredUser?.phone}
+                      <td className="px-6 py-4 whitespace-nowrap ">
+                        {referral?.referredUser?.mobile_number || '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {moment(referral.createdAt).format(

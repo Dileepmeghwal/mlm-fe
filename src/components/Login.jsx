@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { postRequest } from "../config/api";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
   const { setAuthToken, setUser } = useContext(AuthContext);
@@ -9,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPass,setShowPass]=useState(false)
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -39,6 +42,10 @@ const Login = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPass(!showPass);
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
@@ -61,16 +68,29 @@ const Login = () => {
           />
         </div>
 
-        <div className="mb-4">
+       <div className="mb-4 relative">
           <label className="block mb-1">Password</label>
-          <input
-            type="password"
-            className="w-full border px-3 py-2 rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Your password"
-          />
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              className="w-full border px-3 py-2 rounded pr-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Your password"
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+            >
+              {showPass ? (
+                <FiEyeOff  className="h-5 w-5" />
+              ) : (
+                <FiEye className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
 
         <button

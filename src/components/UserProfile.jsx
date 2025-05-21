@@ -100,22 +100,22 @@ const UserProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProfileDetailItem
                 icon={<FaUser className="text-gray-500" />}
-                label="Name"
+                label="Name:-"
                 value={`${userDetails.first_name} ${userDetails.last_name}`}
               />
               <ProfileDetailItem
                 icon={<FaEnvelope className="text-gray-500" />}
-                label="Email"
+                label="Email:-"
                 value={userDetails.email}
               />
               <ProfileDetailItem
                 icon={<FaPhone className="text-gray-500" />}
-                label="Mobile"
+                label="Mobile:-"
                 value={userDetails.mobile_number || "Not provided"}
               />
               <ProfileDetailItem
                 icon={<FaBirthdayCake className="text-gray-500" />}
-                label="Date of Birth"
+                label="Date of Birth:-"
                 value={
                   moment(userDetails.dob).format("MMMM DD, YYYY") ||
                   "Not provided"
@@ -123,7 +123,7 @@ const UserProfile = () => {
               />
               <ProfileDetailItem
                 icon={<FaHome className="text-gray-500" />}
-                label="Address"
+                label="Address:-"
                 value={
                   [userDetails.adress1, userDetails.adress2]
                     .filter(Boolean)
@@ -142,12 +142,12 @@ const UserProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProfileDetailItem
                 icon={<FaTag className="text-gray-500" />}
-                label="Account Type"
+                label="Account Type:-"
                 value={userDetails.type}
               />
               <ProfileDetailItem
                 icon={<FaCheckCircle className="text-gray-500" />}
-                label="Verification Status"
+                label="Verification Status:-"
                 value={
                   <span
                     className={
@@ -162,7 +162,7 @@ const UserProfile = () => {
               />
               <ProfileDetailItem
                 icon={<FaWallet className="text-gray-500" />}
-                label="Wallet Balance"
+                label="Wallet Balance:-"
                 value={`₹${userDetails.wallet?.toFixed(2) || "0.00"}`}
               />
             </div>
@@ -176,22 +176,22 @@ const UserProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProfileDetailItem
                 icon={<FaIdCard className="text-gray-500" />}
-                label="PAN Number"
+                label="PAN Number:-"
                 value={userDetails.pan || "Not provided"}
               />
               <ProfileDetailItem
                 icon={<FaIdCard className="text-gray-500" />}
-                label="Aadhaar Number"
+                label="Aadhaar Number:-"
                 value={userDetails.adhaar || "Not provided"}
               />
               <ProfileDetailItem
                 icon={<FaMobile className="text-gray-500" />}
-                label="UPI ID"
+                label="UPI ID:-"
                 value={userDetails.upi || "Not provided"}
               />
               <ProfileDetailItem
                 icon={<FaUniversity className="text-gray-500" />}
-                label="IFSC"
+                label="IFSC:-"
                 value={
                   userDetails.ifsc
                     ? `${userDetails.ifsc}`
@@ -200,7 +200,7 @@ const UserProfile = () => {
               />
               <ProfileDetailItem
                 icon={<FaUniversity className="text-gray-500" />}
-                label="Bank Name / Branch Name"
+                label="Bank Name / Branch Name:-"
                 value={
                   userDetails.bankAC
                     ? `${userDetails.bankName}`
@@ -209,7 +209,7 @@ const UserProfile = () => {
               />
               <ProfileDetailItem
                 icon={<FaUniversity className="text-gray-500" />}
-                label="Bank Account No "
+                label="Bank Account No:- "
                 value={
                   userDetails.bankAC ? ` ${userDetails.bankAC}` : "Not provided"
                 }
@@ -225,12 +225,12 @@ const UserProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProfileDetailItem
                 icon={<FaCalendarPlus className="text-gray-500" />}
-                label="Account Created"
+                label="Account Created:-"
                 value={new Date(userDetails.createdAt).toLocaleString()}
               />
               <ProfileDetailItem
                 icon={<FaCalendarCheck className="text-gray-500" />}
-                label="Last Updated"
+                label="Last Updated:-"
                 value={new Date(userDetails.updatedAt).toLocaleString()}
               />
             </div>
