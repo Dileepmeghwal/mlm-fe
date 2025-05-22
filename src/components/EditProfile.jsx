@@ -200,11 +200,12 @@ const navigate= useNavigate()
             <FormSection
               icon={<FaBirthdayCake className="text-gray-500" />}
               label="Date of Birth"
+              aria-label="Date of Birth"
               value={
                 <input
                   type="date"
                   className="p-2 border rounded w-full"
-                  value={userData.dob}
+                  // value={userData.dob}
                   onChange={(e) =>
                     setUserData({ ...userData, dob: e.target.value })
                   }

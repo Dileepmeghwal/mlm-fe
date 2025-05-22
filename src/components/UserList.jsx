@@ -17,7 +17,7 @@ const UserList = () => {
           `/user/get-list?page=${currentPage}&limit=20`
         );
         setUsers(response.data);
-        console.log(response.headers);
+        // console.log(response.headers);
         if (response.headers && response.headers["x-pagination"]) {
           try {
             let paginationData = JSON.parse(response.headers["x-pagination"]);

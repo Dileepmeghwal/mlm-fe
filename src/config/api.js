@@ -43,6 +43,7 @@ export const deleteRequest = (endpoint) => {
 };
 
 const getUserId = (id) => {
+  
   if (!id) return `#DTF000`;
   return `#DTF00${id}`;
 };

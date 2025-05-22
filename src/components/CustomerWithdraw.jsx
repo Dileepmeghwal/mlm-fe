@@ -13,7 +13,7 @@ const CustomerWithdraw = () => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const id = user?._id;
-  console.log(user,"user")
+  // console.log(user,"user")
   useEffect(() => {
     const fetchUserData = async () => {
       try {
