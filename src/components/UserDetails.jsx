@@ -25,6 +25,7 @@ import {
 } from "react-icons/fa";
 import { FaWalkieTalkie } from "react-icons/fa6";
 import moment from "moment";
+import { toast } from "react-toastify";
 const UserDetails = () => {
   const location = useLocation();
   const [userDetails, setUserDetails] = useState(null);
@@ -67,7 +68,7 @@ const UserDetails = () => {
       setShowPopup(false);
     } catch (err) {
       console.error("Block/Unblock Error:", err);
-      alert("Failed to update user status. Please try again.");
+      toast.error("Failed to update user status. Please try again.");
     }
   };
 

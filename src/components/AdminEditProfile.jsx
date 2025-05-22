@@ -20,6 +20,7 @@ import {
   FaSave,
   FaArrowLeft,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const AdminEditProfile = () => {
   const location = useLocation();
@@ -62,10 +63,11 @@ const AdminEditProfile = () => {
           ...formData,
           userId: userId,
         });
-        alert("User profile updated successfully!");
+        
+        toast.success("User profile updated successfully!");
         navigate(-1); // Go back to previous page
       } catch (err) {
-        alert("Failed to update user profile");
+        toast.error("Failed to update user profile");
         console.error("Update Error:", err);
       }
     }

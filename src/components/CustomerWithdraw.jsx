@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { extractNumber, getRequest, postRequest } from "../config/api";
 import { AuthContext } from "../context/AuthContext";
 import { FaWallet, FaPercentage, FaMoneyCheckAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const CustomerWithdraw = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -39,15 +40,15 @@ const CustomerWithdraw = () => {
 
   const handleCalculateTax = async () => {
     if (!amount || isNaN(amount)) {
-      alert("Please enter a valid amount.");
+      toast.warning("Please enter a valid amount.");
       return;
     }
     if (amount < 500) {
-      alert("Amount should not be less than 500");
+      toast.warning("Amount should not be less than 500");
       return;
     }
     if (amount > userDetails?.wallet) {
-      alert("Amount exceeds your wallet balance");
+      toast.warning("Amount exceeds your wallet balance");
       return;
     }
 
@@ -75,7 +76,7 @@ const CustomerWithdraw = () => {
           userId: userDetails._id,
           amount: calculationResult.total,
         });
-        alert("Withdrawal processed successfully!");
+        toast.success("Withdrawal processed successfully!");
         // Refresh user data
         const updatedUser = await getRequest(
           `/user/get-by-id/${userDetails._id}`
@@ -85,7 +86,7 @@ const CustomerWithdraw = () => {
         setCalculationResult(null);
       } catch (error) {
         console.error("Withdrawal error:", error);
-        alert("Failed to process withdrawal. Please try again.");
+        toast.error("Failed to process withdrawal. Please try again.");
       } finally {
         setLoading(false);
       }

@@ -320,7 +320,7 @@ const DashboardPage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex flex-col md:flex-row gap-2 md:items-center justify-betwee">
+          <div className="flex flex-col md:flex-row gap-2 md:items-center justify-between">
             <div>
               <p className="text-gray-500 text-sm">Used Referrals</p>
               <p className="text-2xl font-bold">
@@ -332,7 +332,7 @@ const DashboardPage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex flex-col md:flex-row gap-2 md:items-center justify-betwee">
+          <div className="flex flex-col md:flex-row gap-2 md:items-center justify-between">
             <div>
               <p className="text-gray-500 text-sm">Unused Referrals</p>
               <p className="text-2xl font-bold">
@@ -344,7 +344,7 @@ const DashboardPage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-2 md:items-center justify-between">
             <div>
               <p className="text-gray-500 text-sm">Total Amount</p>
               <p className="text-2xl font-bold">

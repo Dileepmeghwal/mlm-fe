@@ -73,11 +73,11 @@ const navigate= useNavigate()
         adress2: userData.adress2,
       });
       
-      alert("Basic information updated successfully");
+      toast.success("Basic information updated successfully");
       navigate("/profile")
       
     } catch (err) {
-      alert("Failed to update basic information");
+      toast.error("Failed to update basic information");
     }
   };
 

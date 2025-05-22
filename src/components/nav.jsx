@@ -1,29 +1,20 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Nav() {
-  const [currentPath, setCurrentPath] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setAuthToken, user, setUser, authToken } = useContext(AuthContext);
-
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentPath(window.location.pathname);
-    }
-  }, []);
+  const location = useLocation();
 
   const isActive = (path) => {
-    // console.log(currentPath, path);
-    return currentPath === path;
+    return location.pathname === path;
   };
 
   const handleLogout = () => {
-    alert('Are you sure want to logout ?')
     setAuthToken(null);
     localStorage.removeItem("authToken");
-    setIsMenuOpen(false); // Close menu on logout
-    // console.log("User logged out");
+    setIsMenuOpen(false);
   };
 
   const toggleMenu = () => {
@@ -35,9 +26,10 @@ export default function Nav() {
       <Link
         to={to}
         onClick={() => setIsMenuOpen(false)}
-        className={`flex items-center justify-between text-sm lg:text-base font-medium hover:text-indigo-700 transition-all duration-500 mb-2 lg:mb-0 lg:mr-6 ${
-          isActive(to) ? "text-indigo-700" : "text-gray-500"
+        className={`flex items-center justify-between text-sm sm:text-base font-medium hover:text-indigo-700 transition-all duration-300 py-2 sm:py-3 px-3 sm:px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+          isActive(to) ? "text-indigo-700 bg-indigo-50" : "text-gray-500"
         }`}
+        aria-current={isActive(to) ? "page" : undefined}
       >
         {label}
       </Link>
@@ -45,24 +37,23 @@ export default function Nav() {
   );
 
   return (
-    <nav className="border-solid  border-gray-200 w-full border-b py-3 bg-white z-50 sticky top-0">
+    <nav className="border-solid border-gray-200 w-full border-b py-3 bg-white z-50 sticky top-0">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex justify-between lg:justify-start gap-10 items-center">
-          {/* Logo/Brand can be added here */}
+        <div className="flex justify-between lg:justify-start gap-6 sm:gap-10 items-center">
+          {/* Logo/Brand */}
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold text-indigo-700">
-              <img src="logo.png" className=" object-cover" width={60} />
+              <img src="logo.png" className="object-cover" width={60} alt="Logo" />
             </Link>
           </div>
 
           {/* Desktop Menu - Hidden on mobile */}
-          <div className="hidden lg:flex ">
-            <ul className="flex items-center space-x-6">
+          <div className="hidden lg:flex">
+            <ul className="flex items-center space-x-4 sm:space-x-6">
               <NavItem to="/" label="Home" />
               {user && authToken && user?.type === "ADMIN" && (
                 <>
                   <NavItem to="/create-pin" label="Create Pin" />
-                  {/* <NavItem to="/withdraw-amount" label="Withdraw Amount" /> */}
                   <NavItem to="/user-list" label="User List" />
                   <NavItem to="/pendingWithdrawal" label="Pending Withdrawal" />
                 </>
@@ -77,19 +68,9 @@ export default function Nav() {
                 <NavItem to="/pin-management" label="Manage Pin" />
               )}
               <li>
-                {
-                  user && authToken && (
-                   <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
-                  )
-                  // : (
-                  //   <Link
-                  //     to="/login"
-                  //     className="text-sm lg:text-base font-medium hover:text-indigo-700 transition-all duration-500 text-gray-500"
-                  //   >
-                  //     Login
-                  //   </Link>
-                  // )
-                }
+                {user && authToken && (
+                  <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
+                )}
               </li>
               {(!user || !authToken) && <NavItem to="/signup" label="New Registration" />}
             </ul>
@@ -99,7 +80,7 @@ export default function Nav() {
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-500 hover:text-indigo-700 focus:outline-none"
+              className="text-gray-500 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md p-2"
               aria-label="Toggle menu"
             >
               <svg
@@ -131,12 +112,11 @@ export default function Nav() {
         {/* Mobile Menu - Shows when toggled */}
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pb-4">
-            <ul className="flex flex-col space-y-3">
+            <ul className="flex flex-col space-y-2">
               <NavItem to="/" label="Home" />
               {user && authToken && user?.type === "ADMIN" && (
                 <>
                   <NavItem to="/create-pin" label="Create Pin" />
-                  {/* <NavItem to="/withdraw-amount" label="Withdraw Amount" /> */}
                   <NavItem to="/user-list" label="User List" />
                   <NavItem to="/pendingWithdrawal" label="Pending Withdrawal" />
                 </>
@@ -147,18 +127,18 @@ export default function Nav() {
                   <NavItem to="/withdraw-user" label="Withdraw" />
                 </>
               )}
-
               {user && authToken && (
                 <NavItem to="/pin-management" label="Manage Pin" />
               )}
               <li>
                 {user && authToken ? (
-                 <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
+                  <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
                 ) : (
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="block text-sm font-medium hover:text-indigo-700 transition-all duration-500 text-gray-500 py-2"
+                    className="block text-sm sm:text-base font-medium hover:text-indigo-700 transition-all duration-300 py-2 px-3 sm:px-4 rounded-md text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    aria-current={isActive("/login") ? "page" : undefined}
                   >
                     Login
                   </Link>
@@ -172,7 +152,6 @@ export default function Nav() {
     </nav>
   );
 }
-
 
 const LogoutConfirmation = ({ setAuthToken, setIsMenuOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -191,30 +170,32 @@ const LogoutConfirmation = ({ setAuthToken, setIsMenuOpen }) => {
     <>
       <button
         onClick={openModal}
-        className="text-sm lg:text-base font-medium hover:text-indigo-700 transition-all duration-500 mb-2 lg:mb-0 lg:mr-6 text-gray-500  "
+        className="text-sm sm:text-base font-medium hover:text-indigo-700 transition-all duration-300 py-2 px-3 sm:px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-500"
       >
         Logout
       </button>
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+          <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6 w-full max-w-sm sm:max-w-md mx-4">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
               Confirm Logout
             </h2>
-            <p className="mb-6 text-gray-600">
+            <p className="mb-4 sm:mb-6 text-sm sm:text-base text-gray-600">
               Are you sure you want to log out?
             </p>
-            <div className="flex justify-end space-x-4">
+            <div className="flex justify-end space-x-3 sm:space-x-4">
               <button
                 onClick={closeModal}
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+                className="px-3 sm:px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors min-h-[40px] text-sm sm:text-base"
+                aria-label="Cancel logout"
               >
                 Cancel
               </button>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                className="px-3 sm:px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors min-h-[40px] text-sm sm:text-base"
+                aria-label="Confirm logout"
               >
                 Log Out
               </button>
@@ -225,4 +206,3 @@ const LogoutConfirmation = ({ setAuthToken, setIsMenuOpen }) => {
     </>
   );
 };
-

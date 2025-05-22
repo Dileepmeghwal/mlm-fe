@@ -14,6 +14,7 @@ import {
   FaPercentage,
   FaMoneyCheckAlt,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const WithdrawAmount = () => {
   const [userId, setUserId] = useState("");
@@ -96,7 +97,7 @@ const WithdrawAmount = () => {
           userId: verifiedUser._id,
           amount: calculationResult.total,
         });
-        alert("Withdrawal processed successfully!");
+        toast.success("Withdrawal processed successfully!");
         // Reset form
         setUserId("");
         setVerifiedUser(null);
@@ -104,7 +105,7 @@ const WithdrawAmount = () => {
         setCalculationResult(null);
       } catch (error) {
         console.error("Withdrawal error:", error);
-        alert("Failed to process withdrawal. Please try again.");
+        toast.error("Failed to process withdrawal. Please try again.");
       } finally {
         setLoading(false);
       }

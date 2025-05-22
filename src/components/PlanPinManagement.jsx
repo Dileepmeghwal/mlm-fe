@@ -14,6 +14,7 @@ import {
   FaTimesCircle,
   FaCopy,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const PlanPinManagement = () => {
   const [pins, setPins] = useState([]);
@@ -98,7 +99,7 @@ const PlanPinManagement = () => {
       const response = await getRequest("/plan-pin/user");
       setPins(response.data);
       setTransferModal(false);
-      alert("PIN transferred successfully");
+      toast.success("PIN transferred successfully");
       setError("");
       setSelectedPin(null);
       setVerifiedUser(null);
@@ -155,7 +156,7 @@ const PlanPinManagement = () => {
                       </td>
                       <td className="py-3 px-4 border-b text-center">
                         <div
-                          className={`flex items-center justify-center gap-2 relative `}
+                          className={`flex items-center justify-center gap-2 relative  `}
                         >
                           {/* Display pin or masked version */}
                           {showPinId === pin._id ? pin.pin : "••••••"}

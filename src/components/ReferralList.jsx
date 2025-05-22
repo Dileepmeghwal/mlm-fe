@@ -96,11 +96,11 @@ const ReferredUserList = () => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {referral.referredUser.first_name || "-"}{" "}
-                        {referral.referredUser.last_name || '-'}
+                        {referral.referredUser.first_name || "N/A"}{" "}
+                        {referral.referredUser.last_name || 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap ">
-                        {referral?.referredUser?.mobile_number || '-'}
+                        {referral?.referredUser?.mobile_number || 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {moment(referral.createdAt).format(
