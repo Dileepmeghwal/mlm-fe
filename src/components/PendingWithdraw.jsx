@@ -50,7 +50,7 @@ const PendingWithdraw = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 container mx-auto">
       <div className="bg-white rounded-xl shadow-sm p-6">
         <div className="flex flex-row justify-between">
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">

@@ -44,8 +44,8 @@ const Notifications = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-10 px-6">
-        <div className="max-w-7xl mx-auto flex items-center space-x-4">
+      <div className=" bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-10 px-6">
+        <div className="container  mx-auto flex items-center space-x-4">
           <div className="bg-white p-3 rounded-full shadow-lg">
             <FaBell className="text-2xl text-blue-500" />
           </div>
@@ -57,7 +57,7 @@ const Notifications = () => {
       </div>
 
       {/* Notifications List */}
-      <div className="max-w-7xl mx-auto -mt-8 px-6 pb-10">
+      <div className="container max-w-8xl mx-auto -mt-8 px-6 pb-10">
         <div className="bg-white p-8 rounded-xl shadow-lg">
           {notifications.length === 0 ? (
             <div className="text-center py-10">

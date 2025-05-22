@@ -152,7 +152,7 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto  sm:-mt-8 px-4 sm:px-6 pb-8">
+      <div className="max-w-8xl mx-auto  sm:-mt-8 px-4 sm:px-6 pb-8">
         {/* User and Wallet Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
           {/* User Details Card */}

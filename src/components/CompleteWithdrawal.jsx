@@ -32,7 +32,7 @@ const CompletedWithdraw = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 container mx-auto">
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">
           Completed Withdrawals

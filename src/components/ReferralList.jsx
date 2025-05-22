@@ -42,7 +42,7 @@ const ReferredUserList = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto">
         <div className="bg-white rounded-lg shadow-md p-6">
           {/* Header with Level Name */}
           <div className="mb-6">
