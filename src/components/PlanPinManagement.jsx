@@ -47,15 +47,7 @@ const PlanPinManagement = () => {
 
     fetchPins();
   }, []);
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(pin);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset tooltip after 2 seconds
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
-  };
+
   const handleVerifyUser = async () => {
     setVerifiedUser(null);
     setVerificationError("");

@@ -14,7 +14,7 @@ const UserList = () => {
       try {
         setIsLoading(true);
         const response = await getRequest(
-          `/user/get-list?page=${currentPage}&limit=20`
+          `/user/get-list?page=${currentPage}&limit=10`
         );
         setUsers(response.data);
         // console.log(response.headers);
@@ -92,7 +92,7 @@ const UserList = () => {
                   key={user._id}
                   className="hover:bg-gray-50 transition-colors"
                 >
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">{index + 1}</td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">{(index + 1) + (currentPage - 1) * 10}</td>
                   <td className="px-3 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <div className="flex-shrink-0 h-8 sm:h-10 w-8 sm:w-10 bg-blue-100 rounded-full flex items-center justify-center">

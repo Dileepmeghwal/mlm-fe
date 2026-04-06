@@ -2,7 +2,12 @@ import axios from "axios";
 
 // const BASE_URL = "https://ml-55od.onrender.com";
 // const BASE_URL = "http://localhost:8002";
-const BASE_URL = "https://api.dtfindia.org";
+// const BASE_URL = "https://api.dtfindia.org";
+// const BASE_URL = "http://13.234.231.216:8002/"
+const BASE_URL = "https://mlm-gules.vercel.app/"
+
+
+
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -16,7 +21,7 @@ api.interceptors.request.use(
     const token = localStorage.getItem("authToken");
 
     if (token) {
-      config.headers["Authorization"] = `${token}`;
+      config.headers["Authorization"] = `${token}`;``
     }
 
     return config;
