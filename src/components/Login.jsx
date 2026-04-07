@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { postRequest } from "../config/api";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -91,6 +91,12 @@ const Login = () => {
               )}
             </button>
           </div>
+        </div>
+
+        <div className="mb-4 text-right">
+          <Link to="/forgot-password" className="text-sm text-blue-500 hover:underline">
+            Forgot Password?
+          </Link>
         </div>
 
         <button

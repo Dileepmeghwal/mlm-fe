@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./Dashboard";
 import Signup from "./Signup";
@@ -21,12 +21,16 @@ import WithdrawList from "./WithdrawList";
 import CustomerWithdraw from "./CustomerWithdraw";
 import PendingWithdraw from "./PendingWithdraw";
 import CompletedWithdraw from "./CompleteWithdrawal";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 export default function RootNavigation() {
   const { authToken, setAuthToken, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    if (!authToken) {
+    const publicPaths = ["/forgot-password", "/reset-password"];
+    if (!authToken && !publicPaths.includes(location.pathname)) {
       navigate("/");
     }
   }, [authToken]);
@@ -48,6 +52,8 @@ export default function RootNavigation() {
       />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verify" element={<VerifyAccount />} /> {/* New Route */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route
         path="/create-pin"
         element={
