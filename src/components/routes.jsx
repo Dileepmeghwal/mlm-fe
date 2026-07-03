@@ -57,7 +57,7 @@ export default function RootNavigation() {
       <Route
         path="/create-pin"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <CreatePin />
           </ProtectedRoute>
         }
@@ -65,7 +65,7 @@ export default function RootNavigation() {
       <Route
         path="/userDetails"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <UserDetails />
           </ProtectedRoute>
         }
@@ -73,7 +73,7 @@ export default function RootNavigation() {
       <Route
         path="/pendingWithdrawal"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <PendingWithdraw />
           </ProtectedRoute>
         }
@@ -81,7 +81,7 @@ export default function RootNavigation() {
       <Route
         path="/completeWithdrawal"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <CompletedWithdraw />
           </ProtectedRoute>
         }
@@ -105,7 +105,7 @@ export default function RootNavigation() {
       <Route
         path="/userDetails/edit"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <AdminEditProfile />
           </ProtectedRoute>
         }
@@ -113,17 +113,17 @@ export default function RootNavigation() {
       <Route
         path="/user-list"
         element={
-          // <ProtectedRoute>
-          <UserList />
-          // </ProtectedRoute>
+          <ProtectedRoute adminOnly>
+            <UserList />
+          </ProtectedRoute>
         }
       />
       <Route
         path="/admin"
         element={
-          // <ProtectedRoute>
-          <DashboardPage />
-          // </ProtectedRoute>
+          <ProtectedRoute adminOnly>
+            <DashboardPage />
+          </ProtectedRoute>
         }
       />
       <Route
@@ -153,7 +153,7 @@ export default function RootNavigation() {
       <Route
         path="/withdraw-amount"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute adminOnly>
             <WithdrawAmount />
           </ProtectedRoute>
         }

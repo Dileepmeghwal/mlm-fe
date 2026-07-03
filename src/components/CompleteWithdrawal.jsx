@@ -75,8 +75,8 @@ const CompletedWithdraw = () => {
                     <div className="flex items-center gap-3">
                       <div className="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
                         <span className="text-purple-600 font-medium">
-                          {withdrawal.user?.first_name[0]}
-                          {withdrawal.user?.last_name[0]}
+                          {withdrawal.user?.first_name?.[0]}
+                          {withdrawal.user?.last_name?.[0]}
                         </span>
                       </div>
                       <div>

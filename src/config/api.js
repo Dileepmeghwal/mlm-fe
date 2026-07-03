@@ -1,13 +1,8 @@
 import axios from "axios";
 
-// const BASE_URL = "https://ml-55od.onrender.com";
-// const BASE_URL = "http://localhost:8002";
-// const BASE_URL = "https://api.dtfindia.org";
-// const BASE_URL = "http://13.234.231.216:8002/"
-const BASE_URL = "http://localhost:8002"
-
-
-
+// Configure the API base URL via the VITE_API_BASE_URL env var (see .env).
+// Falls back to localhost for local development.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8002";
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -21,12 +16,26 @@ api.interceptors.request.use(
     const token = localStorage.getItem("authToken");
 
     if (token) {
-      config.headers["Authorization"] = `${token}`;``
+      config.headers["Authorization"] = token;
     }
 
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// On an expired/invalid session, clear the token and send the user back to login.
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("authToken");
+      if (window.location.pathname !== "/") {
+        window.location.replace("/");
+      }
+    }
     return Promise.reject(error);
   }
 );
@@ -48,9 +57,9 @@ export const deleteRequest = (endpoint) => {
 };
 
 const getUserId = (id) => {
-  
   if (!id) return `#DTF000`;
-  return `#DTF00${id}`;
+  // Zero-pad to at least 3 digits: 2 -> #DTF002, 1234 -> #DTF1234
+  return `#DTF${String(id).padStart(3, "0")}`;
 };
 
 function extractNumber(str) {

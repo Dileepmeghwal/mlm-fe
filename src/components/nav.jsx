@@ -12,8 +12,9 @@ export default function Nav() {
   };
 
   const handleLogout = () => {
-    setAuthToken(null);
     localStorage.removeItem("authToken");
+    setAuthToken(null);
+    setUser(null);
     setIsMenuOpen(false);
   };
 
@@ -69,7 +70,7 @@ export default function Nav() {
               )}
               <li>
                 {user && authToken && (
-                  <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
+                  <LogoutConfirmation setAuthToken={setAuthToken} setUser={setUser} setIsMenuOpen={setIsMenuOpen} />
                 )}
               </li>
               {(!user || !authToken) && <NavItem to="/signup" label="New Registration" />}
@@ -132,10 +133,10 @@ export default function Nav() {
               )}
               <li>
                 {user && authToken ? (
-                  <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
+                  <LogoutConfirmation setAuthToken={setAuthToken} setUser={setUser} setIsMenuOpen={setIsMenuOpen} />
                 ) : (
                   <Link
-                    to="/login"
+                    to="/"
                     onClick={() => setIsMenuOpen(false)}
                     className="block text-sm sm:text-base font-medium hover:text-indigo-700 transition-all duration-300 py-2 px-3 sm:px-4 rounded-md text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     aria-current={isActive("/login") ? "page" : undefined}
@@ -153,12 +154,14 @@ export default function Nav() {
   );
 }
 
-const LogoutConfirmation = ({ setAuthToken, setIsMenuOpen }) => {
+const LogoutConfirmation = ({ setAuthToken, setUser, setIsMenuOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
-    setAuthToken(null);
     localStorage.removeItem("authToken");
+    setAuthToken(null);
+    // Clear the cached user so no identity/PII lingers in memory after logout.
+    setUser?.(null);
     setIsMenuOpen(false);
     setIsOpen(false);
   };

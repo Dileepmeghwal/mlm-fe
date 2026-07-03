@@ -61,18 +61,19 @@ const WithdrawAmount = () => {
   };
 
   const handleCalculateTax = async () => {
-    if (!amount || isNaN(amount)) {
+    const numericAmount = Number(amount);
+    if (!amount || isNaN(numericAmount)) {
       setVerificationError("Please enter a valid amount.");
       return;
     }
-    // if (amount < 500) {
-    //   setVerificationError("Amount should not be less than 500");
-    //   return;
-    // }
-    // if (amount > verifiedUser?.wallet) {
-    //   setVerificationError("amount should not be more than wallet amount.");
-    //   return;
-    // }
+    if (numericAmount < 500) {
+      setVerificationError("Amount should not be less than 500");
+      return;
+    }
+    if (numericAmount > (verifiedUser?.wallet ?? 0)) {
+      setVerificationError("Amount should not be more than wallet balance.");
+      return;
+    }
 
     setLoading(true);
 

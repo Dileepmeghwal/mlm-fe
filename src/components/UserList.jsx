@@ -97,8 +97,8 @@ const UserList = () => {
                     <div className="flex items-center gap-2 sm:gap-3">
                       <div className="flex-shrink-0 h-8 sm:h-10 w-8 sm:w-10 bg-blue-100 rounded-full flex items-center justify-center">
                         <span className="text-blue-600 font-medium text-xs sm:text-sm">
-                          {user.first_name[0]}
-                          {user.last_name[0]}
+                          {user.first_name?.[0]}
+                          {user.last_name?.[0]}
                         </span>
                       </div>
                       <div>
