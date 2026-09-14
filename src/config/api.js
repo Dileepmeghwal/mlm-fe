@@ -1,10 +1,10 @@
 import axios from "axios";
 
 // const BASE_URL = "https://ml-55od.onrender.com";
-// const BASE_URL = "http://localhost:8002";
 // const BASE_URL = "https://api.dtfindia.org";
 // const BASE_URL = "http://13.234.231.216:8002/"
-const BASE_URL = "https://mlm-gules.vercel.app/"
+// const BASE_URL = "https://mlm-gules.vercel.app/"
+const BASE_URL = "http://localhost:8002";  // local testing — backend on port 8002
 
 
 

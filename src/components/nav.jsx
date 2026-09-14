@@ -67,6 +67,9 @@ export default function Nav() {
               {user && authToken && (
                 <NavItem to="/pin-management" label="Manage Pin" />
               )}
+              {user && authToken && user?.type === "ADMIN" && (
+                <NavItem to="/admin-profile" label="Profile" />
+              )}
               <li>
                 {user && authToken && (
                   <LogoutConfirmation setAuthToken={setAuthToken} setIsMenuOpen={setIsMenuOpen} />
@@ -129,6 +132,9 @@ export default function Nav() {
               )}
               {user && authToken && (
                 <NavItem to="/pin-management" label="Manage Pin" />
+              )}
+              {user && authToken && user?.type === "ADMIN" && (
+                <NavItem to="/admin-profile" label="Profile" />
               )}
               <li>
                 {user && authToken ? (

@@ -1,7 +1,10 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./Dashboard";
 import Signup from "./Signup";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
+import AdminProfile from "./AdminProfile";
 import VerifyAccount from "./VerifyAccount";
 import CreatePin from "./CreatePin";
 import Notifications from "./Notifications";
@@ -25,11 +28,14 @@ import CompletedWithdraw from "./CompleteWithdrawal";
 export default function RootNavigation() {
   const { authToken, setAuthToken, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  // Routes a logged-out user is allowed to reach without being bounced to login.
+  const publicPaths = ["/", "/signup", "/forgot-password", "/reset-password"];
   useEffect(() => {
-    if (!authToken) {
+    if (!authToken && !publicPaths.includes(location.pathname)) {
       navigate("/");
     }
-  }, [authToken]);
+  }, [authToken, location.pathname]);
 
   return (
     <Routes>
@@ -47,6 +53,8 @@ export default function RootNavigation() {
         }
       />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/verify" element={<VerifyAccount />} /> {/* New Route */}
       <Route
         path="/create-pin"
@@ -165,6 +173,14 @@ export default function RootNavigation() {
         element={
           <ProtectedRoute>
             <WithdrawList />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin-profile"
+        element={
+          <ProtectedRoute>
+            <AdminProfile />
           </ProtectedRoute>
         }
       />
